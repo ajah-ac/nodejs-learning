@@ -1,6 +1,6 @@
 import fs, { existsSync } from 'fs'
-export function readFile(filename){
-    fs.readFile('fileName','utf8',(err,data)=>{
+export function readFile(fileName){
+    fs.readFile(fileName,'utf8',(err,data)=>{
     if(err){
         console.log(err)
     }
@@ -8,8 +8,8 @@ else{
     console.log(data)   }})
 
 }
-export function WriteFile(fileName){
-    fs.writeFile('fileName','Hello are you good',(err)=>{
+export function writeFile(fileName){
+    fs.writeFile(fileName,'Hello are you good',(err)=>{
 if(err){
     console.log(err)
 }else{
@@ -20,9 +20,9 @@ if(err){
 }
 export function fileExists(fileName){
     if(existsSync(fileName)){
-        console.log(`${filename} exists`)
+        console.log(`${fileName} exists`)
 
     }
     else{
-        console.log(`${filename} does not exist`)    }
+        console.log(`${fileName} does not exist`)    }
 }
