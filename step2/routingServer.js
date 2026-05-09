@@ -7,7 +7,14 @@ const server=http.createServer((req,res)=>{
         res.writeHead(200,{"content-type":"text-plain"})
         res.end('This is the about page')
     }
-   
+     else if(req.url==='/contsct' && req.method==='GET'){
+        res.writeHead(200,{"content-type":"text-plain"})
+        res.end('This is the contact page')
+    }
+    else{
+        res.writeHead(404)
+        res.end('404 page not found')
+    }
 
 })
 server.listen(3000,()=>{
