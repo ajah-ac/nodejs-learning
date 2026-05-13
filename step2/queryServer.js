@@ -8,6 +8,14 @@ const server = http.createServer((req, res) => {
 res.end('<h1>Hello John</h1>')
         
     }
+    else if(parSedurl.pathname==='/search'){
+        res.writeHead(200,{"Content-Type": 'text/html'})
+        res.end(`<h1>Search results for:${parSedurl.query.q}`)
+    }
+    else{
+        res.writeHead(404, { "Content-Type": 'text/html' })
+        res.end('<h1>404 Not Found</h1>')
+    }
 
 
 })
