@@ -1,10 +1,11 @@
 import express from 'express'
 //Basic express server
 const app=express()
+app.use(express.json())
+
 app.get('/',(req,res)=>{
     res.send('Hello')
 })
-app.use(express.json())
 // Multiple routes
 app.get('/about',(req,res)=>{
     res.send('<h1>This is the about page</h1>')
@@ -22,9 +23,10 @@ app.get('/product/:name',(req,res)=>{
     const name=req.params.name
     res.send(`<h1> Product name is :${name}</h1>`)
 })
+    let data=[{id:1,name:'orange'},{id:2,name:'mango'}]
+
 // Different HTTP Methods
 app.get('/api/data',(req,res)=>{
-    const data=[{id:1,name:'orange'},{id:2,name:'mango'}]
     res.send(JSON.stringify(data,null,2))
 })
 app.post('/api/data',(req,res)=>{
@@ -32,7 +34,22 @@ app.post('/api/data',(req,res)=>{
         id:Date.now(),
         name:req.body.name
     }
-    res.send(newData)
+    data.push(newData)
+    res.send(JSON.stringify(newData,null,2))
+})
+app.put('/api/data/:id',(req,res)=>{
+    const id=+req.params.id
+    const found=data.find(d=>d.id===id)
+    if(!found){
+        return res.status(404).send('not found')
+    }
+        found.name=req.body.name || found.name;
+
+res.json(data)
+})
+app.delete('/api/data/:id',(req,res)=>{
+    data=data.filter(d=>d.id!==+req.params.id)
+    res.json(data)
 })
 
 app.listen(3000,()=>{
