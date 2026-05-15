@@ -12,6 +12,13 @@ app.get('/',async (req,res)=>{
     }
     
 })
+app.get('/heavy',(req,res)=>{
+    let total=0
+    for(let i=0;i<1e9;i++){
+        total+=i
+    }
+    res.send(total.toString())
+})
 app.listen(3000,()=>{
     console.log('Server is listening on port 3000')
 })
