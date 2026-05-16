@@ -1,5 +1,6 @@
 import express from 'express';
-
+import productRoutes from './routes/products.js'
+import userRoutes from './routes/users.js'
 
 const app=express()
 const authMiddleware=(req,res,next)=>{
@@ -12,10 +13,13 @@ else{
 }
 
 }
+
 app.use((req,res,next)=>{
     console.log(`Method:${req.method}, URL:${req.url}`)
     next()
 })
+app.use('/api',productRoutes)
+app.use('/api',userRoutes)
 
 app.get('/api/protected',authMiddleware,(req,res)=>{
 res.status(200).send('Hello protected')
