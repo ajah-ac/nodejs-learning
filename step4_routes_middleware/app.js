@@ -17,7 +17,12 @@ app.use((req,res,next)=>{
     next()
 })
 
-
+app.get('/api/protected',authMiddleware,(req,res)=>{
+res.status(200).send('Hello protected')
+})
+app.get('/api/unprotected',(req,res)=>{
+    res.status(200).send('Hello')
+})
 app.listen(3000,()=>{
     console.log('Server is listening on port 3000')
 
