@@ -1,6 +1,6 @@
 import express from 'express'
 const router=express.Router()
-app.get('/products',(req,res)=>{
+router.get('/products',(req,res)=>{
     res.status(200).send('Here are your products')
 })
 
