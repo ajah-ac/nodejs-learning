@@ -17,9 +17,9 @@ app.post('/add-item',(req,res)=>{
         price:req.body.price
     }
     data.push(newItem)
-        console.log(data)
+     console.log(newItem)
 
-    res.json(data)
+    res.json(newItem)
 })
 
 app.listen(3000,()=>{
