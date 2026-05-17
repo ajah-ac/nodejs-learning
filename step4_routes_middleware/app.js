@@ -1,6 +1,7 @@
 import express from 'express';
 import productRoutes from './routes/products.js'
 import userRoutes from './routes/users.js'
+import { error } from 'node:console';
 
 const app=express()
 const authMiddleware=(req,res,next)=>{
@@ -21,11 +22,23 @@ app.use((req,res,next)=>{
 app.use('/api',productRoutes)
 app.use('/api',userRoutes)
 
+
 app.get('/api/protected',authMiddleware,(req,res)=>{
 res.status(200).send('Hello protected')
 })
 app.get('/api/unprotected',(req,res)=>{
     res.status(200).send('Hello')
+})
+app.get('/api/error',(req,res,next)=>{
+    const err=new Error('Something went wrong')
+    next(err)
+})
+app.use((err,req,res,next)=>{
+ console.log(err.message)
+ res.status(500).json({
+    success:false,
+    message:err.message || 'Internal Server error'
+ })
 })
 app.listen(3000,()=>{
     console.log('Server is listening on port 3000')
