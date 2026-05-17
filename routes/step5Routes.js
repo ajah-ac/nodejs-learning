@@ -17,4 +17,27 @@ router.get('/',(req,res)=>{
 
     res.json(items)
 })
+const validate = (req, res, next) => {
+    const { name, price } = req.body;
+
+    if (typeof name !== 'string' || name.trim() === '') {
+        return res.status(400).send('Invalid name');
+    }
+
+    if (typeof price !== 'number') {
+        return res.status(400).send('Price must be a number');
+    }
+
+    next();
+};
+router.post('/',validate,(req,res)=>{
+    const newItem={
+        id:Date.now(),
+        name:req.body.name,
+        price:req.body.price,
+        description:req.body.description
+    }
+    items.push(newItem)
+    res.json(newItem)
+})
 export default router
