@@ -9,7 +9,7 @@ export const createProducts=(req,res)=>{
         price:req.body.price,
         description:req.body.description
     }
-    items.push(newItem)
+    products.push(newItem)
     res.json(newItem)
 }
 export const getProductByid=(req,res)=>{
@@ -21,6 +21,23 @@ export const getProductByid=(req,res)=>{
     if(!found){
       return  res.status(404).send(`Product with id:${id} not found`)
     }
+  
+    res.json(found)
+}
+
+export const updateProduct=(req,res)=>{
+       const id=Number(req.params.id)
+      if(isNaN(id)){
+      return  res.status(400).send(`Id must be a valid number`)
+    }
+    const found=products.find(item=>item.id===id)
+    if(!found){
+      return  res.status(404).send(`Product with id:${id} not found`)
+    }
+found.name=req.body.name || found.name 
+found.description= req.body.description || found.description 
+found.price=  req.body.price || found.price
+
   
     res.json(found)
 }
