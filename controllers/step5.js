@@ -14,9 +14,13 @@ export const createProducts=(req,res)=>{
 }
 export const getProductByid=(req,res)=>{
     const id=Number(req.params.id)
+      if(isNaN(id)){
+      return  res.status(400).send(`Id must be a valid number`)
+    }
     const found=products.find(item=>item.id===id)
     if(!found){
-        res.status(404).send(`Product with id:${id} not found`)
+      return  res.status(404).send(`Product with id:${id} not found`)
     }
+  
     res.json(found)
 }
