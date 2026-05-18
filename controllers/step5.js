@@ -1,4 +1,4 @@
-import { products} from "../models/step5";
+import { products} from "../models/step5.js";
 export const getProducts=(req,res)=>{
     res.json(products)
 }
@@ -11,4 +11,12 @@ export const createProducts=(req,res)=>{
     }
     items.push(newItem)
     res.json(newItem)
+}
+export const getProductByid=(req,res)=>{
+    const id=Number(req.params.id)
+    const found=products.find(item=>item.id===id)
+    if(!found){
+        res.status(404).send(`Product with id:${id} not found`)
+    }
+    res.json(found)
 }
