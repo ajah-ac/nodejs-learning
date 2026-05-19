@@ -5,6 +5,6 @@ const router=express.Router();
 router.get('/',getProducts)
 router.post('/',validate,createProducts)
 router.get('/:id',getProductByid)
-router.put('/:id',updateProduct)
+router.put('/:id',validate,updateProduct)
 router.delete('/:id',deleteProduct)
 export default router
