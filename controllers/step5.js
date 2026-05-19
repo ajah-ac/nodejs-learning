@@ -41,3 +41,20 @@ found.price=  req.body.price || found.price
   
     res.json(found)
 }
+
+
+
+export const deleteProduct=(req,res)=>{
+    const id=Number(req.params.id)
+      if(isNaN(id)){
+      return  res.status(400).send(`Id must be a valid number`)
+    }
+    console.log(id)
+    const index=products.findIndex(p=>p.id===id)
+    if(index===-1){
+        return res.status(400).send(`No product with ${id} found`)
+
+    }
+products.splice(index,1)
+    res.status(200).send('Deleted successfully')
+}
