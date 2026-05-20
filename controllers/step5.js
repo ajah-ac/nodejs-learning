@@ -8,7 +8,22 @@ export const getProducts = (req, res) => {
         const filtered = products.filter(p => p.name.toLowerCase().includes(search.toLowerCase()))
         return res.status(200).send(filtered)
     }
-  
+    if (minPrice && maxPrice) {
+        const filtered = products.filter(p => p.price <= Number(maxPrice) && p.price >= Number(minPrice))
+        if (filtered.length === 0) {
+            res.status(404).send('No matching results found')
+        }
+        return res.status(200).send(filtered)
+    }
+    else if (maxPrice) {
+        const filtered = products.filter(p => p.price <= Number(maxPrice))
+        if (filtered.length === 0) {
+            res.status(404).send('No matching results found')
+        }
+        return res.status(200).send(filtered)
+
+    }
+ 
 
 }
 export const createProducts = (req, res) => {
