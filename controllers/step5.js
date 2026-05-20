@@ -23,7 +23,16 @@ export const getProducts = (req, res) => {
         return res.status(200).send(filtered)
 
     }
- 
+    else if (minPrice) {
+        const filtered = products.filter(p => p.price >= Number(minPrice))
+        if (filtered.length === 0) {
+            res.status(404).send('No matching results found')
+        }
+        return res.status(200).send(filtered)
+    }
+    else {
+        res.status(404).send('No matching results found')
+    }
 
 }
 export const createProducts = (req, res) => {
