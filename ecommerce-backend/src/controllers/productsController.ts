@@ -27,4 +27,27 @@ if(filtered.length===0){
  return res.status(200).json(filtered)
 
 }
+
+if(minPrice && maxPrice){
+    const filtered=productsData.filter(p=>p.price>=minPrice && p.price <=maxPrice)
+    if(filtered.length===0){
+        return res.status(404).send(`No products found in${maxPrice} -${minPrice} price range`)
+    }
+    return res.status(200).json(filtered)
+}
+else if(minPrice){
+     const filtered=productsData.filter(p=>p.price >= minPrice)
+    if(filtered.length===0){
+        return res.status(404).send(`No products found in${minPrice}  price range`)
+    }
+    return res.status(200).json(filtered)
+}
+else if(maxPrice){
+     const filtered=productsData.filter(p=>p.price >= maxPrice)
+    if(filtered.length===0){
+        return res.status(404).send(`No products found in${maxPrice}  price range`)
+    }
+    return res.status(200).json(filtered)
+}
+
 }
