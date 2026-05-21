@@ -1,5 +1,6 @@
 import { response, request } from 'express'
 import productsData from '../data/products.ts'
+import { getById } from '../data/utils/getId.ts';
 interface ProdParams{
     category?:string,
         minPrice?:number,
@@ -8,8 +9,8 @@ interface ProdParams{
 
 }
 export const getAllProducts = (req:request<ProdParams>, res:response) => {
- const {category,minPrice, maxPrice, search}=req.body;
-if(req.body===undefined){
+ const {category,minPrice, maxPrice, search}=req.query;
+if(req.query===undefined){
     return res.status(200).json(productsData)
 }
 if(category && category.trim()!==''){
@@ -53,4 +54,16 @@ else{
     res.status(200).json([])
 }
 
+}
+
+type Id={
+id:number
+}
+export const getProductByid=(req:request<Id>,res:response)=>{
+    const id=+req.params
+    const product=getById(productsData,id)
+    if(product===undefined){
+        res.status(200).json([])
+    }
+    return res.status(200).json(product)
 }
