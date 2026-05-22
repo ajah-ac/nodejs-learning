@@ -1,6 +1,6 @@
 import { response, request } from 'express'
 import productsData from '../data/products.ts'
-import { getById } from '../data/utils/getId.ts';
+import { getById } from '../data/utils/getById.ts';
 interface ProdParams{
     category?:string,
         minPrice?:number,

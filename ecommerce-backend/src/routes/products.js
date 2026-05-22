@@ -1,6 +1,7 @@
 import express from 'express'
- const router=express.Router
-router.get('/')
+import { getAllProducts } from '../controllers/productsController.ts'
+ const router=express.Router()
+router.get('/',getAllProducts)
 router.post('/')
 router.put('/:id')
 router.delete('/:id')

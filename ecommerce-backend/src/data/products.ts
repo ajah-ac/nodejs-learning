@@ -9,7 +9,7 @@ export type ProductsType = {
     createdAt: Date,
     UpdateAt: Date
 }
-export const products: ProductsType[] = [
+ const productsData: ProductsType[] = [
     {
         id: 1,
         name: 'nike',
@@ -47,3 +47,4 @@ export const products: ProductsType[] = [
 
     }
 ]
+export default productsData
