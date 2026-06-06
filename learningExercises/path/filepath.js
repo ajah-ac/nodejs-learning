@@ -5,3 +5,6 @@ function getFilePath(fileName){
     const extension=path.extname(fileName);
     return {directory,baseName,extension};
 }
+function relativeToAbsolute(absolutePath){
+    return path.resolve(absolutePath);
+}
